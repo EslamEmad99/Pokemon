@@ -7,7 +7,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
 import com.example.pokemon.presentation.sideeffect.PokemonSideEffect
 import com.example.pokemon.presentation.viewmodel.PokemonDetailsViewModel
 import com.example.pokemon.presentation.viewmodel.PokemonListViewModel
@@ -21,7 +20,11 @@ fun PokemonNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = PokemonRoute.List
+        startDestination = PokemonRoute.List,
+        enterTransition = { pokemonEnterTransition() },
+        exitTransition = { pokemonExitTransition() },
+        popEnterTransition = { pokemonPopEnterTransition() },
+        popExitTransition = { pokemonPopExitTransition() }
     ) {
         composable<PokemonRoute.List> {
             PokemonListRoute(
@@ -32,8 +35,6 @@ fun PokemonNavGraph(
         }
 
         composable<PokemonRoute.Details> {
-            val route = it.toRoute<PokemonRoute.Details>()
-
             PokemonDetailsRoute(
                 onNavigateBack = {
                     navController.popBackStack()
