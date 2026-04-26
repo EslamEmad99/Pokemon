@@ -6,6 +6,7 @@ import com.example.pokemon.domain.model.PokemonResult
 import com.example.pokemon.domain.usecase.GetPokemonListUseCase
 import com.example.pokemon.presentation.event.PokemonListUiEvent
 import com.example.pokemon.presentation.mapper.toUiModel
+import com.example.pokemon.presentation.model.PokemonUiModel
 import com.example.pokemon.presentation.sideeffect.PokemonSideEffect
 import com.example.pokemon.presentation.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,7 @@ class PokemonListViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UIState<List<com.example.pokemon.presentation.model.PokemonUiModel>>>(UIState.Loading)
+    private val _uiState = MutableStateFlow<UIState<List<PokemonUiModel>>>(UIState.Loading)
     val uiState = _uiState.asStateFlow()
 
     private val _sideEffect = MutableSharedFlow<PokemonSideEffect>()
