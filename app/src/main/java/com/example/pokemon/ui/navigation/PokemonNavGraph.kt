@@ -2,6 +2,7 @@ package com.example.pokemon.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -49,7 +50,8 @@ private fun PokemonListRoute(
     onNavigateToDetails: (String) -> Unit
 ) {
     val viewModel: PokemonListViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
 
     CollectPokemonSideEffects(
         sideEffect = viewModel.sideEffect,
@@ -63,6 +65,7 @@ private fun PokemonListRoute(
 
     PokemonListScreen(
         uiState = uiState,
+        searchQuery = searchQuery,
         onEvent = viewModel::onEvent
     )
 }
@@ -72,7 +75,7 @@ private fun PokemonDetailsRoute(
     onNavigateBack: () -> Unit
 ) {
     val viewModel: PokemonDetailsViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     CollectPokemonSideEffects(
         sideEffect = viewModel.sideEffect,

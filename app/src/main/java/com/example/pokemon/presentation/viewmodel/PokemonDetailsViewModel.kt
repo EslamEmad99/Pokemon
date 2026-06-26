@@ -7,6 +7,7 @@ import com.example.pokemon.domain.model.PokemonResult
 import com.example.pokemon.domain.usecase.GetPokemonDetailsUseCase
 import com.example.pokemon.presentation.event.PokemonDetailsUiEvent
 import com.example.pokemon.presentation.mapper.toUiModel
+import com.example.pokemon.presentation.model.PokemonDetailsUiModel
 import com.example.pokemon.presentation.sideeffect.PokemonSideEffect
 import com.example.pokemon.presentation.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +27,7 @@ class PokemonDetailsViewModel @Inject constructor(
 
     private val pokemonName: String = checkNotNull(savedStateHandle["name"])
 
-    private val _uiState = MutableStateFlow<UIState<com.example.pokemon.presentation.model.PokemonDetailsUiModel>>(UIState.Loading)
+    private val _uiState = MutableStateFlow<UIState<PokemonDetailsUiModel>>(UIState.Empty)
     val uiState = _uiState.asStateFlow()
 
     private val _sideEffect = MutableSharedFlow<PokemonSideEffect>()

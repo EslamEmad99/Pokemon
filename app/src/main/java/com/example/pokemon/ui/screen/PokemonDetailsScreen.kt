@@ -24,6 +24,8 @@ fun PokemonDetailsScreen(
     val strings = LocalResourceProvider.current
 
     when (uiState) {
+        UIState.Empty -> {}
+
         UIState.Loading -> {
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
                 CircularProgressIndicator()

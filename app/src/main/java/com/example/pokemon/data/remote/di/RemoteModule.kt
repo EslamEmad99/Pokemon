@@ -1,5 +1,6 @@
 package com.example.pokemon.data.remote.di
 
+import com.example.pokemon.BuildConfig
 import com.example.pokemon.data.remote.api.PokemonApi
 import com.example.pokemon.data.remote.datasource.PokemonRemoteDataSource
 import com.example.pokemon.data.remote.datasource.PokemonRemoteDataSourceImpl
@@ -10,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
@@ -30,8 +32,20 @@ object RemoteModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(loggingInterceptor)
+            }
+        }.build()
     }
 
     @Provides

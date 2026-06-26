@@ -5,8 +5,10 @@
     <string name="pokemon_error_server_error">Server error</string>
     <string name="pokemon_error_data_error">Data parsing error</string>
     <string name="pokemon_error_unknown">Something went wrong</string>
-
     <string name="pokemon_height">Height: %1$d</string>
     <string name="pokemon_weight">Weight: %1$d</string>
     <string name="pokemon_types">Types: %1$s</string>
+    <string name="no_pokemons">No Pokemon\'s</string>
+    <string name="retry">Retry</string>
+    <string name="search_pokemons">Search Pokémon</string>
 </resources>

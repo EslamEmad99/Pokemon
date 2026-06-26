@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

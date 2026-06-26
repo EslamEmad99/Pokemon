@@ -1,5 +1,6 @@
 package com.example.pokemon.data.di
 
+import com.example.pokemon.data.local.cache.PokemonMemoryCache
 import com.example.pokemon.data.logger.PokemonLogger
 import com.example.pokemon.data.logger.PokemonLoggerImpl
 import com.example.pokemon.data.remote.datasource.PokemonRemoteDataSource
@@ -23,10 +24,22 @@ object DataModule {
 
     @Provides
     @Singleton
+    fun providePokemonMemoryCache(): PokemonMemoryCache {
+        return PokemonMemoryCache()
+    }
+
+    @Provides
+    @Singleton
     fun providePokemonRepository(
         remote: PokemonRemoteDataSource,
-        logger: PokemonLogger
+        logger: PokemonLogger,
+        memoryCache: PokemonMemoryCache
     ): PokemonRepository {
-        return PokemonRepositoryImpl(remote, logger)
+
+        return PokemonRepositoryImpl(
+            remote = remote,
+            logger = logger,
+            memoryCache = memoryCache
+        )
     }
 }
