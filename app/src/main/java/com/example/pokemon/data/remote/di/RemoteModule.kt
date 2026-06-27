@@ -2,6 +2,7 @@ package com.example.pokemon.data.remote.di
 
 import com.example.pokemon.BuildConfig
 import com.example.pokemon.data.remote.api.PokemonApi
+import com.example.pokemon.data.remote.datasource.FakePokemonRemoteDataSource
 import com.example.pokemon.data.remote.datasource.PokemonRemoteDataSource
 import com.example.pokemon.data.remote.datasource.PokemonRemoteDataSourceImpl
 import dagger.Module
@@ -69,11 +70,17 @@ object RemoteModule {
         return retrofit.create(PokemonApi::class.java)
     }
 
+//    @Provides
+//    @Singleton
+//    fun providePokemonRemoteDataSource(
+//        api: PokemonApi
+//    ): PokemonRemoteDataSource {
+//        return PokemonRemoteDataSourceImpl(api)
+//    }
+
     @Provides
     @Singleton
-    fun providePokemonRemoteDataSource(
-        api: PokemonApi
-    ): PokemonRemoteDataSource {
-        return PokemonRemoteDataSourceImpl(api)
+    fun providePokemonRemoteDataSource(): PokemonRemoteDataSource {
+        return FakePokemonRemoteDataSource()
     }
 }

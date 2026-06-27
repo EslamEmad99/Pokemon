@@ -46,6 +46,7 @@ fun PokemonListScreen(
             }
         )
 
+        println("my_state $uiState")
         when (uiState) {
             UIState.Empty -> Unit
 

@@ -31,7 +31,7 @@ class PokemonListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UIState<List<PokemonUiModel>>>(UIState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    private val _searchQuery = MutableStateFlow("")
+    private val _searchQuery = MutableStateFlow<String?>(null)
     val searchQuery = _searchQuery.asStateFlow()
 
     private val _sideEffect = MutableSharedFlow<PokemonSideEffect>()
@@ -48,7 +48,9 @@ class PokemonListViewModel @Inject constructor(
                 .debounce(300)
                 .distinctUntilChanged()
                 .collectLatest { query ->
-                    search(query)
+                    query?.let {
+                        search(it)
+                    }
                 }
         }
     }
@@ -72,6 +74,7 @@ class PokemonListViewModel @Inject constructor(
     }
 
     private fun search(query: String) {
+        println("my_pokemons search $query")
         viewModelScope.launch {
             when (val result = searchPokemonUseCase(query)) {
                 is PokemonResult.Success -> {

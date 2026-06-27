@@ -3,8 +3,6 @@ package com.example.pokemon.data.remote.datasource
 import com.example.pokemon.data.remote.api.PokemonApi
 import com.example.pokemon.data.remote.dto.PokemonDetailsDto
 import com.example.pokemon.data.remote.dto.PokemonDto
-import com.example.pokemon.data.remote.dto.TypeDto
-import com.example.pokemon.data.remote.dto.TypeSlotDto
 import com.example.pokemon.data.remote.util.handleRequest
 
 internal class PokemonRemoteDataSourceImpl(

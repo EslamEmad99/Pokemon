@@ -65,7 +65,7 @@ private fun PokemonListRoute(
 
     PokemonListScreen(
         uiState = uiState,
-        searchQuery = searchQuery,
+        searchQuery = searchQuery ?: "",
         onEvent = viewModel::onEvent
     )
 }
